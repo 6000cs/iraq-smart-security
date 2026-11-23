@@ -1,0 +1,585 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10243a">
+  <title>الأمن العراقي الذكي | بوابة المواطن</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* هوية المشروع وبيانات المؤسس */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-emblem {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand-details {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-details strong {
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .brand-details small {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+    }
+
+    .founder-credit {
+      font-size: 11px;
+      margin-top: 5px;
+      color: #d5b66c;
+    }
+
+    .project-disclaimer {
+      text-align: center;
+      font-size: 11px;
+      color: #b9c3ce;
+      margin-top: 8px;
+    }
+
+    .footer-founder {
+      color: #d5b66c;
+      font-weight: 700;
+      margin: 8px 0;
+    }
+
+    @media (max-width: 600px) {
+      .brand-emblem {
+        width: 43px;
+        height: 43px;
+      }
+
+      .brand-details strong {
+        font-size: 15px;
+      }
+
+      .founder-credit {
+        font-size: 9px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+
+    <a class="brand" href="#" onclick="showPage('home');return false" aria-label="الرئيسية">
+
+      <!-- ضع صورة النسر الرسمية باسم iraq-eagle.png بجانب ملفات الموقع -->
+      <img
+        src="iraq-eagle.png"
+        alt="شعار النسر الجمهوري العراقي"
+        class="brand-emblem"
+      >
+
+      <span class="brand-details">
+        <strong>الأمن العراقي الذكي</strong>
+        <small>IRAQ SMART SECURITY</small>
+        <span class="founder-credit">تأسيس وإعداد: المهندس منتظر نبيل الشرع</span>
+      </span>
+
+    </a>
+
+    <nav class="main-nav" aria-label="القائمة الرئيسية">
+      <a href="#home" onclick="showPage('home');return false">الرئيسية</a>
+      <a href="#services" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'});return false">الخدمات</a>
+      <a href="#faq" onclick="document.getElementById('faq').scrollIntoView({behavior:'smooth'});return false">إرشادات</a>
+    </nav>
+
+    <div class="menu-wrap">
+      <button class="dots-button" id="menuButton" aria-label="المزيد" aria-expanded="false" onclick="toggleMenu()">⋮</button>
+
+      <div class="dropdown hidden" id="moreMenu">
+        <button onclick="closeMenu();showPage('staffLogin')">
+          <span>♙</span>
+          <span><b>الموظف</b><small>دخول لوحة الإدارة</small></span>
+        </button>
+
+        <button onclick="closeMenu();showPage('staffLogin')">
+          <span>♜</span>
+          <span><b>المدير</b><small>دخول الإدارة الكامل</small></span>
+        </button>
+      </div>
+    </div>
+
+  </header>
+
+  <main>
+
+    <!-- الصفحة الرئيسية -->
+    <section id="home" class="page active">
+
+      <section class="hero">
+        <div class="hero-content">
+
+          <p class="eyebrow">بوابة المواطن · خدمات إلكترونية سهلة وآمنة</p>
+
+          <h1>نحن هنا <span>للاستماع إليك</span></h1>
+
+          <p class="hero-text">
+            قدّم بلاغك أو طلبك بسهولة، وتابع حالته باستخدام رقم المتابعة.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-gold" onclick="startReport()">＋ تقديم بلاغ</button>
+            <button class="btn btn-light" onclick="showPage('track')">⌕ متابعة طلب</button>
+          </div>
+
+          <p class="hero-note">لا تحتاج إلى إنشاء حساب لتقديم طلب تجريبي.</p>
+
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="shield">✦</div>
+          <div class="art-caption">خدمة المواطن أولاً</div>
+        </div>
+      </section>
+
+      <section class="section-block" id="services">
+        <div class="section-heading">
+          <span></span>
+          <h2>اختر نوع الخدمة</h2>
+          <span></span>
+        </div>
+
+        <p class="section-subtitle">
+          اختر القسم المناسب حتى نعرض لك الاستمارة الملائمة.
+        </p>
+
+        <div class="service-grid" id="serviceGrid"></div>
+      </section>
+
+      <section class="tracking-banner">
+        <div class="tracking-icon">✓</div>
+
+        <div class="tracking-copy">
+          <h2>كيف تتابع طلبك؟</h2>
+          <p>
+            بعد تقديم الطلب تحصل على رقم متابعة خاص به،
+            ويمكنك استخدامه لمعرفة آخر تحديث.
+          </p>
+        </div>
+
+        <button class="btn btn-navy" onclick="showPage('track')">
+          متابعة طلبك ←
+        </button>
+      </section>
+
+      <section class="info-grid" id="faq">
+
+        <article class="info-card">
+          <span>◎</span>
+          <h3>سهولة الاستخدام</h3>
+          <p>خطوات واضحة وتقديم مباشر دون تسجيل حساب.</p>
+        </article>
+
+        <article class="info-card">
+          <span>⌕</span>
+          <h3>متابعة الطلب</h3>
+          <p>احتفظ برقم المتابعة لمعرفة حالة الطلب التجريبي.</p>
+        </article>
+
+        <article class="info-card">
+          <span>♧</span>
+          <h3>إرشادات مهمة</h3>
+          <p>لا ترسل معلومات حساسة أو بلاغات حقيقية في هذا النموذج التجريبي.</p>
+        </article>
+
+      </section>
+    </section>
+
+    <!-- صفحة تقديم الطلب -->
+    <section id="report" class="page narrow-page">
+
+      <button class="back-link" onclick="showPage('home')">← العودة للرئيسية</button>
+
+      <div class="page-heading">
+        <span class="heading-icon">✎</span>
+        <div>
+          <p class="eyebrow">بوابة المواطن</p>
+          <h1>تقديم طلب أو بلاغ</h1>
+          <p>املأ الحقول التالية بمعلومات وهمية لأغراض التجربة فقط.</p>
+        </div>
+      </div>
+
+      <form id="citizenForm" class="panel form-panel">
+
+        <div class="form-row">
+          <label for="category">نوع الخدمة <em>*</em></label>
+          <select id="category" name="category" required></select>
+        </div>
+
+        <div class="form-row">
+          <label for="subject">عنوان الطلب <em>*</em></label>
+          <input id="subject" name="subject" maxlength="100" placeholder="اكتب عنواناً مختصراً" required>
+        </div>
+
+        <div class="form-row">
+          <label for="details">تفاصيل الطلب <em>*</em></label>
+          <textarea id="details" name="details" rows="6" maxlength="1500" placeholder="اكتب تفاصيل تجريبية غير حقيقية..." required></textarea>
+          <small>لا تكتب أسماء أو أرقام هواتف أو عناوين حقيقية أو معلومات سرية.</small>
+        </div>
+
+        <div class="form-row">
+          <label for="contact">وسيلة تواصل تجريبية (اختياري)</label>
+          <input id="contact" name="contact" maxlength="60" placeholder="مثال: demo@example.com">
+        </div>
+
+        <label class="check-row">
+          <input type="checkbox" id="demoConfirm" required>
+          أؤكد أن البيانات المدخلة وهمية وليست بلاغاً حقيقياً.
+        </label>
+
+        <button class="btn btn-gold full-width" type="submit">
+          إرسال الطلب التجريبي
+        </button>
+
+      </form>
+
+      <div id="submissionResult" class="result-card hidden" aria-live="polite"></div>
+    </section>
+
+    <!-- صفحة متابعة الطلب -->
+    <section id="track" class="page narrow-page">
+
+      <button class="back-link" onclick="showPage('home')">← العودة للرئيسية</button>
+
+      <div class="page-heading">
+        <span class="heading-icon">⌕</span>
+        <div>
+          <p class="eyebrow">خدمة المتابعة</p>
+          <h1>متابعة الطلب</h1>
+          <p>أدخل رقم المتابعة الذي ظهر لك بعد الإرسال.</p>
+        </div>
+      </div>
+
+      <form id="trackForm" class="panel track-panel">
+        <label for="trackNumber">رقم المتابعة</label>
+
+        <div class="track-input-row">
+          <input id="trackNumber" placeholder="مثال: ISS-000001" required>
+          <button class="btn btn-gold" type="submit">بحث</button>
+        </div>
+      </form>
+
+      <div id="trackResult" class="result-card hidden" aria-live="polite"></div>
+    </section>
+
+    <!-- تسجيل الدخول -->
+    <section id="staffLogin" class="page narrow-page">
+
+      <button class="back-link" onclick="showPage('home')">← العودة إلى بوابة المواطن</button>
+
+      <div class="page-heading">
+        <span class="heading-icon">♜</span>
+        <div>
+          <p class="eyebrow">دخول خاص</p>
+          <h1>بوابة الإدارة</h1>
+          <p>للاستخدام التجريبي من قبل المدير والموظفين.</p>
+        </div>
+      </div>
+
+      <form id="loginForm" class="panel form-panel">
+
+        <div class="form-row">
+          <label for="loginRole">نوع الحساب</label>
+          <select id="loginRole">
+            <option value="manager">المدير</option>
+            <option value="employee">الموظف</option>
+          </select>
+        </div>
+
+        <div class="form-row" id="employeeUserRow">
+          <label for="loginUsername">اسم المستخدم</label>
+          <input id="loginUsername" autocomplete="username" placeholder="اسم المستخدم">
+        </div>
+
+        <div class="form-row">
+          <label for="loginPassword">رمز الدخول / كلمة المرور</label>
+          <input id="loginPassword" type="password" autocomplete="current-password" placeholder="أدخل رمز الدخول" required>
+        </div>
+
+        <button class="btn btn-gold full-width" type="submit">دخول</button>
+
+        <p class="form-hint" id="loginHint">رمز المدير التجريبي: 20062006</p>
+        <p id="loginMessage" class="message error" aria-live="polite"></p>
+
+      </form>
+    </section>
+
+    <!-- لوحة الإدارة -->
+    <section id="dashboard" class="page dashboard-page">
+
+      <div class="dashboard-top">
+        <div>
+          <p class="eyebrow">مساحة العمل الداخلية</p>
+          <h1>لوحة الإدارة</h1>
+          <p id="welcomeText">مرحباً</p>
+        </div>
+
+        <button class="btn btn-outline-light" onclick="logout()">تسجيل الخروج</button>
+      </div>
+
+      <div class="dashboard-layout">
+
+        <aside class="side-menu">
+
+          <button class="side-link selected" data-section="overview" onclick="showAdminSection('overview')">▦ نظرة عامة</button>
+
+          <button class="side-link" data-section="requests" onclick="showAdminSection('requests')">▤ إدارة الطلبات</button>
+
+          <button class="side-link manager-only" data-section="archive" onclick="showAdminSection('archive')">▣ أرشيف الشكاوى</button>
+
+          <button class="side-link manager-only" data-section="trash" onclick="showAdminSection('trash')">♲ سلة المحذوفات</button>
+
+          <button class="side-link" data-section="analytics" onclick="showAdminSection('analytics')">▥ الإحصاء والتحليل</button>
+
+          <button class="side-link" data-section="performance" onclick="showAdminSection('performance')">◷ تقييم الأداء</button>
+
+          <button class="side-link" data-section="assistant" onclick="showAdminSection('assistant')">✧ المساعد الذكي التجريبي</button>
+
+          <button class="side-link manager-only" data-section="employees" onclick="showAdminSection('employees')">♙ إدارة الموظفين</button>
+
+          <button class="side-link manager-only" data-section="audit" onclick="showAdminSection('audit')">◷ سجل العمليات</button>
+
+          <button class="side-link manager-only" data-section="backup" onclick="showAdminSection('backup')">⤓ النسخ الاحتياطي</button>
+
+        </aside>
+
+        <div class="dashboard-content">
+
+          <section class="admin-section active" id="admin-overview">
+
+            <h2>ملخص الطلبات</h2>
+
+            <div class="stats-grid">
+              <div class="stat-card"><span>إجمالي الطلبات</span><strong id="statTotal">0</strong></div>
+              <div class="stat-card"><span>طلبات جديدة</span><strong id="statNew">0</strong></div>
+              <div class="stat-card"><span>قيد المراجعة</span><strong id="statReview">0</strong></div>
+              <div class="stat-card"><span>مكتملة</span><strong id="statDone">0</strong></div>
+            </div>
+
+            <div class="command-strip">
+              <div><span>في الأرشيف</span><strong id="statArchived">0</strong></div>
+              <div><span>محالة للموظفين</span><strong id="statAssigned">0</strong></div>
+              <div><span>نسبة الإنجاز</span><strong id="statCompletion">0%</strong></div>
+            </div>
+
+            <div class="panel">
+              <h3>آخر الطلبات</h3>
+              <div id="latestRequests" class="request-list"></div>
+            </div>
+
+          </section>
+
+          <section class="admin-section" id="admin-requests">
+
+            <div class="section-title-row">
+              <h2>إدارة الطلبات</h2>
+              <input id="requestSearch" class="search-input" placeholder="بحث برقم الطلب أو العنوان..." oninput="renderAdminRequests()">
+            </div>
+
+            <div id="adminRequestList" class="request-list"></div>
+          </section>
+
+          <section class="admin-section" id="admin-archive">
+
+            <div class="section-title-row">
+              <h2>أرشيف الشكاوى</h2>
+              <input id="archiveSearch" class="search-input" placeholder="بحث في الأرشيف..." oninput="renderArchive()">
+            </div>
+
+            <p class="section-subtitle admin-note">الأرشفة لا تحذف السجل؛ ويمكن للمدير استعادته.</p>
+
+            <div id="archiveList" class="request-list"></div>
+          </section>
+
+          <section class="admin-section" id="admin-trash">
+
+            <h2>سلة المحذوفات</h2>
+
+            <p class="section-subtitle admin-note">
+              الحذف هنا مؤقت. الحذف النهائي متاح للمدير حصراً وبعد التأكيد.
+            </p>
+
+            <div id="trashList" class="request-list"></div>
+          </section>
+
+          <section class="admin-section" id="admin-analytics">
+
+            <h2>الإحصاء والتحليل</h2>
+
+            <div class="stats-grid">
+              <div class="stat-card"><span>طلبات هذا الشهر</span><strong id="monthCount">0</strong></div>
+              <div class="stat-card"><span>طلبات قيد المعالجة</span><strong id="activeCount">0</strong></div>
+              <div class="stat-card"><span>طلبات مرفوضة</span><strong id="rejectedCount">0</strong></div>
+              <div class="stat-card"><span>متوسط مدة الإنجاز</span><strong id="avgCompletion">—</strong></div>
+            </div>
+
+            <div class="panel">
+              <h3>التوزيع حسب الحالة</h3>
+              <div id="statusAnalytics" class="analytics-list"></div>
+            </div>
+
+            <div class="panel analytics-panel">
+              <h3>التوزيع حسب القسم</h3>
+              <div id="categoryAnalytics" class="analytics-list"></div>
+            </div>
+
+            <button class="btn btn-navy" onclick="exportAnalytics()">
+              تصدير تقرير الإحصائيات CSV
+            </button>
+
+          </section>
+
+          <section class="admin-section" id="admin-performance">
+
+            <h2>تقييم الأداء المؤسسي</h2>
+
+            <p class="section-subtitle admin-note">
+              مؤشرات إدارية للأقسام والإنجاز فقط، وليست تقييماً للأشخاص أو المواطنين.
+            </p>
+
+            <div id="performanceList" class="request-list"></div>
+          </section>
+
+          <section class="admin-section" id="admin-assistant">
+
+            <h2>المساعد الذكي التجريبي</h2>
+
+            <div class="panel">
+
+              <p class="admin-note">
+                هذه نسخة محلية توضيحية تستخدم قواعد كلمات مفتاحية للتصنيف والتلخيص،
+                وليست نموذج ذكاء اصطناعي متصلاً أو أداة لاتخاذ قرارات أمنية.
+              </p>
+
+              <div class="form-row">
+                <label for="assistantRecord">اختر طلباً تجريبياً</label>
+                <select id="assistantRecord"></select>
+              </div>
+
+              <button class="btn btn-gold" onclick="analyzeSelectedRecord()">تحليل الطلب</button>
+
+              <div id="assistantResult" class="assistant-result hidden" aria-live="polite"></div>
+
+            </div>
+          </section>
+
+          <section class="admin-section" id="admin-backup">
+
+            <h2>النسخ الاحتياطي واستعادة البيانات</h2>
+
+            <div class="panel backup-panel">
+
+              <p>
+                يمكن للمدير تصدير بيانات النموذج التجريبي إلى ملف JSON أو استيراد نسخة سابقة.
+              </p>
+
+              <button class="btn btn-navy" onclick="exportBackup()">
+                تنزيل نسخة احتياطية JSON
+              </button>
+
+              <div class="form-row backup-import">
+                <label for="backupFile">استعادة نسخة JSON</label>
+                <input id="backupFile" type="file" accept="application/json,.json">
+              </div>
+
+              <button class="btn btn-gold" onclick="importBackup()">استعادة النسخة المحددة</button>
+
+              <p class="admin-note">
+                احتفظ بالنسخ الاحتياطية في مكان آمن. هذه النسخة تحفظ بيانات هذا المتصفح فقط.
+              </p>
+
+            </div>
+          </section>
+
+          <section class="admin-section" id="admin-employees">
+
+            <h2>إدارة الموظفين</h2>
+
+            <form id="employeeForm" class="panel employee-form">
+
+              <div class="form-row">
+                <label for="employeeName">اسم الموظف</label>
+                <input id="employeeName" required maxlength="70">
+              </div>
+
+              <div class="form-row">
+                <label for="employeeDepartment">القسم / الاختصاص</label>
+                <select id="employeeDepartment"></select>
+              </div>
+
+              <div class="form-row">
+                <label for="employeeUsername">اسم المستخدم</label>
+                <input id="employeeUsername" required maxlength="30">
+              </div>
+
+              <div class="form-row">
+                <label for="employeePassword">كلمة مرور تجريبية</label>
+                <input id="employeePassword" required minlength="4" maxlength="50">
+              </div>
+
+              <button class="btn btn-gold" type="submit">＋ إضافة موظف</button>
+
+            </form>
+
+            <div id="employeeList" class="request-list"></div>
+          </section>
+
+          <section class="admin-section" id="admin-audit">
+            <h2>سجل العمليات</h2>
+            <div id="auditList" class="request-list"></div>
+          </section>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- تذييل المشروع -->
+  <footer class="site-footer">
+
+    <div class="footer-brand">
+      <strong>الأمن العراقي الذكي</strong>
+      <small>IRAQ SMART SECURITY</small>
+    </div>
+
+    <p class="footer-founder">
+      تأسيس وإعداد: المهندس منتظر نبيل الشرع
+    </p>
+
+    <p class="project-disclaimer">
+      مشروع ابتكاري تجريبي غير حكومي، ولا يمثل جهة رسمية.
+    </p>
+
+    <p>© 2026 جميع الحقوق محفوظة للمشروع التجريبي.</p>
+
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
